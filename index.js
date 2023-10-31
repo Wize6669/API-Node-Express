@@ -28,12 +28,12 @@ app.get("/", (req, res) => {
   res.send("Welcome to my first API with Node js!");
 });
 
-app.get("/api/v1/branchs", (req, res) => {
+app.get("/api/v2/branchs", (req, res) => {
   const data = readData();
   res.json(data.branchs);
 });
 
-app.get("/api/v1/branchs/:id", (req, res) => {
+app.get("/api/v2/branchs/:id", (req, res) => {
   const data = readData();
   const id = parseInt(req.params.id);
   if (id > data.branchs.length || id <= 0) {
@@ -46,7 +46,7 @@ app.get("/api/v1/branchs/:id", (req, res) => {
   res.json(branch);
 });
 
-app.post("/api/v1/branchs", (req, res) => {
+app.post("/api/v2/branchs", (req, res) => {
   const data = readData();
   const body = req.body;
   const newbranch = {
@@ -58,7 +58,7 @@ app.post("/api/v1/branchs", (req, res) => {
   res.json(newbranch);
 });
 
-app.put("/api/v1/branchs/:id", (req, res) => {
+app.put("/api/v2/branchs/:id", (req, res) => {
   const data = readData();
   const body = req.body;
   const id = parseInt(req.params.id);
@@ -78,7 +78,7 @@ app.put("/api/v1/branchs/:id", (req, res) => {
   res.json(obj);
 });
 
-app.delete("/api/v1/branchs/:id", (req, res) => {
+app.delete("/api/v2/branchs/:id", (req, res) => {
   try {
     const data = readData();
     const id = parseInt(req.params.id);
