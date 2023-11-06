@@ -7,6 +7,18 @@ app.use(bodyParser.json());
 
 const port = 3000;
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+let aux1 = getRandomInt(10);
+let aux2 = getRandomInt(10);
+let aux3 = getRandomInt(10);
+let aux4 = getRandomInt(10);
+
+const pinFunction = `${aux1}${aux2}${aux3}${aux4}`;
+console.log(pinFunction);
+
 const readData = () => {
   try {
     const data = fs.readFileSync("./db.json");
@@ -25,7 +37,7 @@ const writeData = (data) => {
 };
 
 app.get("/", (req, res) => {
-  res.send("Welcome to my first API with Node js!");
+  res.send("Welcome to my first API with Node js!" + pinFunction);
 });
 
 app.get("/api/v2/branchs", (req, res) => {
@@ -56,6 +68,18 @@ app.post("/api/v2/branchs", (req, res) => {
   data.branchs.push(newbranch);
   writeData(data);
   res.json(newbranch);
+});
+
+app.post("/api/v1/login", (req, res) => {
+  const { pin } = req.body;
+  if (!(pin === parseInt(pinFunction))) {
+    res.json({
+      message: "Error, Login fault",
+    });
+  }
+  res.json({
+    message: "Login successful",
+  });
 });
 
 app.put("/api/v2/branchs/:id", (req, res) => {
@@ -99,5 +123,5 @@ app.delete("/api/v2/branchs/:id", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+  console.log(`Server listening on port ${port} + ${pinFunction}`);
 });
