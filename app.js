@@ -25,7 +25,7 @@ const swaggerOptions = {
 };
 
 app.get("/", (_, res) => {
-  res.send("Access code: " + accessCode);
+  res.send("Access code: " + accessCodeGenerated);
 });
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
