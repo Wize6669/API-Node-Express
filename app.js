@@ -11,6 +11,7 @@ const app = express();
 app.use(bodyParser.json());
 
 const port = process.env.PORT_SERVER ?? 3001;
+const url = process.env.URL_SERVER ?? "http://localhost";
 
 const swaggerOptions = {
   swaggerDefinition: {
@@ -33,7 +34,28 @@ app.use("/api/v1/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 /**
  * @swagger
- * /login:
+ * definitions:
+ *   TokenResponse:
+ *     type: object
+ *     properties:
+ *       status:
+ *         type: string
+ *         enum: [success]
+ *       subDomain:
+ *         type: string
+ *       accessToken:
+ *         type: string
+ *
+ * securityDefinitions:
+ *   BearerAuth:
+ *     type: apiKey
+ *     name: Authorization
+ *     in: header
+ */
+
+/**
+ * @swagger
+ * /api/v1/login:
  *   post:
  *     description: Login in to the Orion system
  *     tags:
@@ -60,15 +82,7 @@ app.use("/api/v1/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
  *       200:
  *         description: Success
  *         schema:
- *           type: object
- *           properties:
- *             status:
- *               type: string
- *               enum: [success]
- *             subDomain:
- *               type: string
- *             accessToken:
- *               type: string
+ *           $ref: '#/definitions/TokenResponse'
  *       401:
  *         description: Invalid access code
  *         schema:
@@ -105,13 +119,90 @@ app.post("/api/v1/login", (req, res) => {
   });
 });
 
+/**
+ * @swagger
+ * /api/v1/consultStatusEmergencyOrders:
+ *   get:
+ *     description: Get Order Status
+ *     tags:
+ *       - Group Orders
+ *     parameters:
+ *      - name: Authorization
+ *        in: header
+ *        description: Bearer token
+ *        required: true
+ *        type: string
+ *     responses:
+ *       200:
+ *         description: Success
+ *         schema:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: string
+ *               description: Status of the request.
+ *               example: success
+ *             orders:
+ *               type: object
+ *               description: Details of the order status.
+ *               properties:
+ *                 generated:
+ *                   type: integer
+ *                   description: Number of orders generated.
+ *                   example: 2
+ *                 inProcess:
+ *                   type: integer
+ *                   description: Number of orders in process.
+ *                   example: 6
+ *                 preliminary:
+ *                   type: integer
+ *                   description: Number of preliminary orders.
+ *                   example: 1
+ *                 reported:
+ *                   type: integer
+ *                   description: Number of reported orders.
+ *                   example: 10
+ *       401:
+ *         description: Unauthorized
+ *         schema:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: string
+ *               description: Status of the request.
+ *               example: error
+ *             message:
+ *               type: string
+ *               description: Error message.
+ *               example: Unauthorized. Please provide a valid Bearer token in the Authorization header.
+ *       403:
+ *         description: Forbidden
+ *         schema:
+ *           type: object
+ *           properties:
+ *             status:
+ *               type: string
+ *               description: Status of the request.
+ *               example: error
+ *             message:
+ *               type: string
+ *               description: Error message.
+ *               example: Forbidden. You do not have permission to access this resource.
+ */
+
 app.get("/api/v1/consultStatusEmergencyOrders", validateToken, (_, res) => {
   const data = readDataE();
+  const randomId = Math.floor(Math.random() * data.emergencyOrders.length);
+  if (randomId === 0) randomId = randomId + 1;
   const emergencyOrderData = data.emergencyOrders.find(
-    (emergencyOrder) =>
-      emergencyOrder.id ===
-      Math.floor(Math.random() * data.emergencyOrders.length)
+    (emergencyOrder) => emergencyOrder.id === randomId
   );
+  if (!emergencyOrderData) {
+    return res.status(404).json({
+      status: "error",
+      message: "Emergency order not found",
+    });
+  }
   const emergencyOrder = {
     orders: emergencyOrderData.orders,
   };
@@ -143,6 +234,7 @@ app.get("/api/v1/branchs", validateToken, (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
+  console.log(`${url}:${port}`);
 });
 
 function getRandomInt(max) {
