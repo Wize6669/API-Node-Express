@@ -29,7 +29,7 @@ app.get("/", (_, res) => {
 });
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use("/api/v2/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+app.use("/api/v1/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 /**
  * @swagger
