@@ -10,9 +10,14 @@ This comprehensive project introduces a prototype that integrates an Alexa voice
 ## Installation
 Install the dependencies.
 
-`$ npm install i`
+```sh
+npm i
+```
 
 ## Getting Started
-`$ npm run start`
+
+```sh
+npm run start
+```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
