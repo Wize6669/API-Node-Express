@@ -41,11 +41,14 @@ app.use("/api/v1/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
  *       status:
  *         type: string
  *         enum: [success]
+ *       laboratoryName:
+ *         type: string
+ *       branchName:
+ *         type: string
  *       subDomain:
  *         type: string
  *       accessToken:
  *         type: string
- *
  * securityDefinitions:
  *   BearerAuth:
  *     type: apiKey
@@ -116,6 +119,8 @@ app.post("/api/v1/login", (req, res) => {
     status: "success",
     subDomain: branch.subDomain,
     token: accessToken,
+    laboratory: branch.nameLaboratory,
+    branch: branch.branch,
   });
 });
 
