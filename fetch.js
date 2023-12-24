@@ -16,10 +16,10 @@ function getEmergencyOrders(url, accessToken, id) {
         return emergencyOrder;
       }
       const aux = await response.json();
-      const { id, nameLaboratory, subDomain, token, branch } = aux;
+      const { id, laboratoryName, subDomain, token, branch } = aux;
       emergencyOrder = {
         id: id,
-        nameLaboratory: nameLaboratory,
+        laboratoryName: laboratoryName,
         subDomain: subDomain,
         token: token,
         branch: branch,

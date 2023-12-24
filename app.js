@@ -117,10 +117,10 @@ app.post("/api/v1/login", (req, res) => {
 
   res.status(200).json({
     status: "success",
+    laboratoryName: branch.laboratoryName,
+    branchName: branch.branch,
     subDomain: branch.subDomain,
     token: accessToken,
-    laboratory: branch.nameLaboratory,
-    branch: branch.branch,
   });
 });
 
