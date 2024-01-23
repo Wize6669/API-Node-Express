@@ -38,9 +38,6 @@ app.use("/api/v1/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
  *   TokenResponse:
  *     type: object
  *     properties:
- *       status:
- *         type: string
- *         enum: [success]
  *       laboratoryName:
  *         type: string
  *       branchName:
@@ -79,6 +76,8 @@ app.use("/api/v1/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
  *               type: integer
  *             branchCode:
  *               type: integer
+ *             externalSystemID:
+ *               type: integer
  *             accessCode:
  *               type: string
  *     responses:
@@ -91,24 +90,21 @@ app.use("/api/v1/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
  *         schema:
  *           type: object
  *           properties:
- *             status:
- *               type: string
- *               enum: [error]
  *             message:
  *               type: string
  */
 
 app.post("/api/v1/login", (req, res) => {
-  const { laboratoryID, branchCode, accessCode } = req.body;
+  const { laboratoryID, branchCode, externalSystemID, accessCode } = req.body;
   const data = readData();
   const branch = data.branchs.find(
     (branch) =>
-      branch.laboratoryID === laboratoryID && branch.branchCode === branchCode
+      branch.laboratoryID === laboratoryID && branch.branchCode === branchCode &&
+        branch.externalSystemID === externalSystemID
   );
 
   if (!branch || accessCode !== accessCodeGenerated) {
     return res.status(401).json({
-      status: "error",
       message: "Incorrect credentials",
     });
   }
@@ -116,7 +112,6 @@ app.post("/api/v1/login", (req, res) => {
   const accessToken = generateAccessToken(branch);
 
   res.status(200).json({
-    status: "success",
     laboratoryName: branch.laboratoryName,
     branchName: branch.branchName,
     subDomain: branch.subDomain,
@@ -131,6 +126,10 @@ app.post("/api/v1/login", (req, res) => {
  *     description: Get Order Status
  *     tags:
  *       - Group Orders
+ *     consumes:
+ *       - application/json
+ *     produces:
+ *       - application/json
  *     parameters:
  *      - name: Authorization
  *        in: header
@@ -143,14 +142,6 @@ app.post("/api/v1/login", (req, res) => {
  *         schema:
  *           type: object
  *           properties:
- *             status:
- *               type: string
- *               description: Status of the request.
- *               example: success
- *             orders:
- *               type: object
- *               description: Details of the order status.
- *               properties:
  *                 generated:
  *                   type: integer
  *                   description: Number of orders generated.
@@ -172,46 +163,46 @@ app.post("/api/v1/login", (req, res) => {
  *         schema:
  *           type: object
  *           properties:
- *             status:
- *               type: string
- *               description: Status of the request.
- *               example: error
  *             message:
  *               type: string
  *               description: Error message.
  *               example: Unauthorized. Please provide a valid Bearer token in the Authorization header.
- *       403:
- *         description: Forbidden
- *         schema:
- *           type: object
- *           properties:
- *             status:
- *               type: string
- *               description: Status of the request.
- *               example: error
- *             message:
- *               type: string
- *               description: Error message.
- *               example: Forbidden. You do not have permission to access this resource.
  */
 
 app.get("/api/v1/consultStatusEmergencyOrders", validateToken, (_, res) => {
   const data = readDataE();
-  const randomId = Math.floor(Math.random() * data.emergencyOrders.length);
+  let randomId = Math.floor(Math.random() * data.emergencyOrders.length);
   if (randomId === 0) randomId = randomId + 1;
   const emergencyOrderData = data.emergencyOrders.find(
     (emergencyOrder) => emergencyOrder.id === randomId
   );
   if (!emergencyOrderData) {
     return res.status(404).json({
-      status: "error",
       message: "Emergency order not found",
     });
   }
-  const emergencyOrder = {
-    orders: emergencyOrderData.orders,
-  };
-  return res.status(200).json(emergencyOrder);
+  const { generated, inProcess, preliminary, reported } = emergencyOrderData
+
+  return res.status(200).json({ generated, inProcess, preliminary, reported });
+});
+
+app.get("/api/v1/consultStatusEmergencyOrdersRange", validateToken, (req, res) => {
+  const {from, to} = req.body;
+  console.log(from, to)
+  const data = readDataE();
+  let randomId = Math.floor(Math.random() * data.emergencyOrders.length);
+  if (randomId === 0) randomId = randomId + 1;
+  const emergencyOrderData = data.emergencyOrders.find(
+      (emergencyOrder) => emergencyOrder.id === randomId
+  );
+  if (!emergencyOrderData) {
+    return res.status(404).json({
+      message: "Emergency order not found",
+    });
+  }
+  const { generated, inProcess, preliminary, reported } = emergencyOrderData
+
+  return res.status(200).json({ generated, inProcess, preliminary, reported });
 });
 
 app.get("/api/v1/all-branchs", validateToken, (_, res) => {
