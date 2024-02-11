@@ -3,7 +3,7 @@
         {
             "laboratoryID": 1,
             "branchCode": 1,
-            "externalSystemID": 1,
+            "externalSystemID": 523,
             "laboratoryName": "Asista net",
             "subDomain": "sur",
             "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYWJvcmF0b3J5SUQiOjEsImJyYW5jaENvZGUiOjEsIm5hbWVMYWJvcmF0b3J5IjoiQXNpc3RhIG5ldCIsInN1YkRvbWluaW8iOiJzdXIiLCJ0b2tlbiI6IkFLSUFRS1NQQlBITVpXNERON09NIiwiYnJhbmNoIjoiU3VyIiwiaWF0IjoxNzAzMjE3NjYwfQ.tiheHYCO0Vvp2ZPNbpbfNeE4LLDKLvRvLK8Je7Mx-f8",
@@ -12,7 +12,7 @@
         {
             "laboratoryID": 2,
             "branchCode": 2,
-            "externalSystemID": 1,
+            "externalSystemID": 523,
             "laboratoryName": "Asista net",
             "subDomain": "norte",
             "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYWJvcmF0b3J5SUQiOjEsImJyYW5jaENvZGUiOjEsIm5hbWVMYWJvcmF0b3J5IjoiQXNpc3RhIG5ldCIsInN1YkRvbWluaW8iOiJzdXIiLCJ0b2tlbiI6IkFLSUFRS1NQQlBITVpXNERON09NIiwiYnJhbmNoIjoiU3VyIiwiaWF0IjoxNzAzMjE3NjYwfQ.tiheHYCO0Vvp2ZPNbpbfNeE4LLDKLvRvLK8Je7Mx-f8",
@@ -21,7 +21,7 @@
         {
             "laboratoryID": 3,
             "branchCode": 3,
-            "externalSystemID": 1,
+            "externalSystemID": 523,
             "laboratoryName": "Servilab",
             "subDomain": "centro",
             "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYWJvcmF0b3J5SUQiOjEsImJyYW5jaENvZGUiOjEsIm5hbWVMYWJvcmF0b3J5IjoiQXNpc3RhIG5ldCIsInN1YkRvbWluaW8iOiJzdXIiLCJ0b2tlbiI6IkFLSUFRS1NQQlBITVpXNERON09NIiwiYnJhbmNoIjoiU3VyIiwiaWF0IjoxNzAzMjE3NjYwfQ.tiheHYCO0Vvp2ZPNbpbfNeE4LLDKLvRvLK8Je7Mx-f8",
@@ -30,7 +30,7 @@
         {
             "laboratoryID": 4,
             "branchCode": 4,
-            "externalSystemID": 1,
+            "externalSystemID": 523,
             "laboratoryName": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYWJvcmF0b3J5SUQiOjEsImJyYW5jaENvZGUiOjEsIm5hbWVMYWJvcmF0b3J5IjoiQXNpc3RhIG5ldCIsInN1YkRvbWluaW8iOiJzdXIiLCJ0b2tlbiI6IkFLSUFRS1NQQlBITVpXNERON09NIiwiYnJhbmNoIjoiU3VyIiwiaWF0IjoxNzAzMjE3NjYwfQ.tiheHYCO0Vvp2ZPNbpbfNeE4LLDKLvRvLK8Je7Mx-f8",
             "subDomain": "cv",
             "token": "AKIAQKSPBPHMZW4DN7OM",

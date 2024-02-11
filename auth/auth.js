@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
-function generateAccessToken(user) {
-  return jwt.sign(user, process.env.SECRET_KEY);
+function generateAccessToken(laboratory) {
+  return jwt.sign(laboratory, process.env.SECRET_KEY);
 }
 
 function validateToken(req, res, next) {
