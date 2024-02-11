@@ -1,33 +1,6 @@
-import "dotenv/config";
-import express from "express";
-import cors from "cors";
-import morgan from "morgan";
 import swaggerJsDoc from "swagger-jsdoc";
 import swaggerUI from "swagger-ui-express";
 
-const app = express();
-const urlFront = process.env.NEXT_PUBLIC_FRONT_END_URL;
-const portFront = process.env.NEXT_PUBLIC_FRONT_END_PORT;
-
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(morgan("dev"));
-
-// Routes
-import { router as HomeRoute } from "./routes/home.route.js";
-import { router as LoginRoute } from "./routes/login.route.js";
-import { router as OrdersSummaryRoute } from "./routes/ordersSummary.route.js";
-import { validateLognIn } from "./validators/login.validator.js";
-import { validateToken } from "./middleware/jwt.middleware.js";
-
-app.use(
-  cors({
-    origin: `${urlFront}:${portFront}`,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-  })
-);
-
-// Documentation
 const swaggerOptions = {
   swaggerDefinition: {
     info: {
@@ -63,8 +36,6 @@ app.use("/api/v1/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
  *     name: Authorization
  *     in: header
  */
-
-app.use("/", HomeRoute);
 
 /**
  * @swagger
@@ -106,7 +77,6 @@ app.use("/", HomeRoute);
  *             message:
  *               type: string
  */
-app.use("/api/v1/login", validateLognIn, LoginRoute);
 
 /**
  * @swagger
@@ -157,6 +127,3 @@ app.use("/api/v1/login", validateLognIn, LoginRoute);
  *               description: Error message.
  *               example: Unauthorized. Please provide a valid Bearer token in the Authorization header.
  */
-app.use("/api/v1/orders-sumary", validateToken, OrdersSummaryRoute);
-
-export { app };

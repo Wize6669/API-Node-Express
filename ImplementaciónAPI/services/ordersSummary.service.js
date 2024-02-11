@@ -1,12 +1,12 @@
-import { pool } from "./db.service.js";
+import {pool} from "./db.service.js";
 
 export const consultStatusEmergencyOrdersService = async (
-  dateFrom,
-  dateTo,
-  laboratoryID,
-  branchCode
+    dateFrom,
+    dateTo,
+    laboratoryID,
+    branchCode
 ) => {
-  const query = `
+    const query = `
         SELECT COALESCE(SUM(o.G), 0) AS sum_G, 
         COALESCE(SUM(o.P), 0) AS sum_P, 
         COALESCE(SUM(o.R), 0) AS sum_R, 
@@ -17,20 +17,20 @@ export const consultStatusEmergencyOrdersService = async (
         AND o.laboratoryID = ? 
         AND o.branchID = ?;
         `;
-  const [rows] = await pool.query(query, [
-    dateFrom,
-    dateTo,
-    laboratoryID,
-    branchCode,
-  ]);
+    const [rows] = await pool.query(query, [
+        dateFrom,
+        dateTo,
+        laboratoryID,
+        branchCode,
+    ]);
 
-  return rows.map((row) => {
-    return {
-      G: row?.G,
-      P: row?.P,
-      R: row?.R,
-      L: row?.L,
-      V: row?.V,
-    };
-  });
+    return rows.map((row) => {
+        return {
+            G: row?.sum_G,
+            P: row?.sum_P,
+            R: row?.sum_R,
+            L: row?.sum_L,
+            V: row?.sum_V,
+        };
+    });
 };

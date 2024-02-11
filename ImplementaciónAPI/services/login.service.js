@@ -15,9 +15,19 @@ export const signInService = async (laboratoryID, branchCode) => {
     const branchName = rows[0]?.branch_name;
     const sudDomain = rows[0]?.sub_domain;
 
-    let laboratory = { tenant, branchName, sudDomain };
+    let laboratory = {
+      tenant,
+      branchName,
+      sudDomain,
+    };
 
-    const token = generateAccessToken(laboratory);
+    let auxLaboratory = {
+      ...laboratory,
+      laboratoryID,
+      branchCode,
+    };
+
+    const token = generateAccessToken(auxLaboratory);
     laboratory = { ...laboratory, token };
 
     return laboratory;
