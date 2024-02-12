@@ -13,12 +13,12 @@ export const signInService = async (laboratoryID, branchCode) => {
   if (rows.length > 0) {
     const tenant = rows[0]?.tenant;
     const branchName = rows[0]?.branch_name;
-    const sudDomain = rows[0]?.sub_domain;
+    const subDomain = rows[0]?.sub_domain;
 
     let laboratory = {
       tenant,
       branchName,
-      sudDomain,
+      subDomain: subDomain,
     };
 
     let auxLaboratory = {

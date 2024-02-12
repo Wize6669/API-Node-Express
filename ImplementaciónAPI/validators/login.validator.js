@@ -16,13 +16,7 @@ const validateLognIn = [
     }),
   body("accessCode")
     .notEmpty()
-    .withMessage("PIN or accessCode required")
-    .custom((value, { req }) => {
-      if (value !== getGeneratedPIN()) {
-        throw new Error("Invalid credentials");
-      }
-      return true;
-    }),
+    .withMessage("PIN or accessCode required"),
   (req, res, next) => {
     validateResult(req, res, next);
   },

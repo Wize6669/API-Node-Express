@@ -24,7 +24,7 @@ export const consultStatusEmergencyOrdersService = async (
         branchCode,
     ]);
 
-    return rows.map((row) => {
+     const response =rows.map((row) => {
         return {
             G: row?.sum_G,
             P: row?.sum_P,
@@ -33,4 +33,6 @@ export const consultStatusEmergencyOrdersService = async (
             V: row?.sum_V,
         };
     });
+
+     return response[0]
 };
