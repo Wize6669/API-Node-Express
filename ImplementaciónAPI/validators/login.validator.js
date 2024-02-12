@@ -1,6 +1,5 @@
 import { body } from "express-validator";
 import { validateResult } from "../utils/validateHelper.util.js";
-import { getGeneratedPIN } from "../controllers/home.controller.js";
 
 const validateLognIn = [
   body("laboratoryID").notEmpty().withMessage("LaboratoryID required"),

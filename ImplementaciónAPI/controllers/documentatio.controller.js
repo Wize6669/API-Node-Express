@@ -1,5 +1,6 @@
 import swaggerJsDoc from "swagger-jsdoc";
 import swaggerUI from "swagger-ui-express";
+import {app} from "../app.js";
 
 const swaggerOptions = {
   swaggerDefinition: {
@@ -22,7 +23,7 @@ app.use("/api/v1/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
  *   TokenResponse:
  *     type: object
  *     properties:
- *       laboratoryName:
+ *       tenant:
  *         type: string
  *       branchName:
  *         type: string
@@ -101,22 +102,25 @@ app.use("/api/v1/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
  *         schema:
  *           type: object
  *           properties:
- *                 generated:
+ *                 G:
  *                   type: integer
  *                   description: Number of orders generated.
  *                   example: 2
- *                 inProcess:
+ *                 P:
  *                   type: integer
  *                   description: Number of orders in process.
  *                   example: 6
- *                 preliminary:
+ *                 L:
  *                   type: integer
  *                   description: Number of preliminary orders.
  *                   example: 1
- *                 reported:
+ *                 R:
  *                   type: integer
  *                   description: Number of reported orders.
  *                   example: 10
+ *                 V:
+ *                   type: integer
+ *                   description Number of validated orders.
  *       401:
  *         description: Unauthorized
  *         schema:
