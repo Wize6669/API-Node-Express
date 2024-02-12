@@ -19,6 +19,7 @@ import { router as LoginRoute } from "./routes/login.route.js";
 import { router as OrdersSummaryRoute } from "./routes/ordersSummary.route.js";
 import { validateLognIn } from "./validators/login.validator.js";
 import { validateToken } from "./middleware/jwt.middleware.js";
+import {validateOrdersSummary} from "./validators/ordersSummary.validator.js";
 
 app.use(
   cors({
@@ -157,6 +158,6 @@ app.use("/api/v1/login", validateLognIn, LoginRoute);
  *               description: Error message.
  *               example: Unauthorized. Please provide a valid Bearer token in the Authorization header.
  */
-app.use("/api/v1/orders-sumary", validateToken, OrdersSummaryRoute);
+app.use("/api/v1/orders-sumary", [validateToken, validateOrdersSummary], OrdersSummaryRoute);
 
 export { app };
