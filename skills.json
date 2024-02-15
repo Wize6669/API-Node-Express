@@ -1,0 +1,9 @@
+[
+    {
+        "skill_name": "Skill Orión",
+        "client_id": "amzn1.application-oa2-client.cb4595a4f042406ebe901888d9e79c35",
+        "client_secret": "amzn1.oa2-cs.v1.689a82843f03ab887316711dfc84ed3e4acf9f694bf253378a3561ccb8242fa7",
+        "message": "",
+        "validity_hours": "24"
+    }
+]
