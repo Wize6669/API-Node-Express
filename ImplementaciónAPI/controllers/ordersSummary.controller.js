@@ -1,9 +1,9 @@
-import { consultStatusEmergencyOrdersService } from "../services/ordersSummary.service.js";
+import { getStatusEmergencyOrdersService } from "../services/ordersSummary.service.js";
 
-export const consultStatusEmergencyOrders = async (req, res) => {
+export const getStatusEmergencyOrders = async (req, res) => {
   try {
     const { dateFrom, dateTo, emergency } = req.query;
-    const response = await consultStatusEmergencyOrdersService(
+    const response = await getStatusEmergencyOrdersService(
       dateFrom,
       dateTo,
       1,

@@ -3,6 +3,6 @@ import * as OrdersSummaryController from "../controllers/ordersSummary.controlle
 
 const router = Router();
 
-router.get("/", OrdersSummaryController.consultStatusEmergencyOrders);
+router.get("/", OrdersSummaryController.getStatusEmergencyOrders);
 
 export { router };

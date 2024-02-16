@@ -1,25 +1,27 @@
 {
-    "timestamp": "",
-    "referenceId": "03",
-    "expiryTime": "",
-    "event": {
-      "name": "AMAZON.MessageAlert.Activated",
-      "payload": {
-        "state": {
-          "status": "UNREAD",
-          "freshness": "NEW"
+  "timestamp": "",
+  "referenceId": "03",
+  "expiryTime": "",
+  "event": {
+    "name": "AMAZON.MessageAlert.Activated",
+    "payload": {
+      "state": {
+        "status": "UNREAD",
+        "freshness": "NEW"
+      },
+      "messageGroup": {
+        "urgency": "URGENT",
+        "creator": {
+          "name": ""
         },
-        "messageGroup": {
-          "urgency": "URGENT",
-          "creator": {
-            "name": ""
-          },
-          "count": 1
-        }
+        "count": 1
       }
-    },
-    "relevantAudience": {
-        "type": "Multicast",
-        "payload": {}
     }
+  },
+  "relevantAudience": {
+    "type": "Unicast",
+    "payload": {
+      "user": "amzn1.ask.account.AGQY7YOJWMTFUOXZQNUVC6Z3GDSIGKPCOH6LMT4FE3D67PF2APMYHI3ZQKMAHYNNQAYWNTWED3WNWCYZVYHF5R5RBFFVMJBLVKQ6ZHGP7YMBCDYYLYNAAXH4GW3JN3VSI5KRS2HALNS2VASM76YVTWPA62Q6GKAIZCAOCTM6JKFCO3J2DBK5WSFJEMOBLJYUC5PNOAWFFS2DQCA"
+    }
+  }
 }

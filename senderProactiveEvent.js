@@ -12,7 +12,6 @@ async function sendProactiveEventNotification(
   config,
   messageOverride = null
 ) {
-  console.log("asdsd");
   if (!skill?.client_id || !skill?.client_secret) {
     console.log(
       "client_id or client_secret not configured for skill.",
