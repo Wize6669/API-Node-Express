@@ -196,7 +196,6 @@ app.get("/api/v1/orders-summary", validateToken, (req, res) => {
 
 app.post("/api/v1/create-order", async (req, res) => {
   const { laboratoryID, branchCode } = req.body;
-
   try {
     const response = await sendRabbitMQMessage(
       "API for Orion",

@@ -1,0 +1,27 @@
+{
+  "timestamp": "",
+  "referenceId": "03",
+  "expiryTime": "",
+  "event": {
+    "name": "AMAZON.MessageAlert.Activated",
+    "payload": {
+      "state": {
+        "status": "UNREAD",
+        "freshness": "NEW"
+      },
+      "messageGroup": {
+        "urgency": "URGENT",
+        "creator": {
+          "name": ""
+        },
+        "count": 1
+      }
+    }
+  },
+  "relevantAudience": {
+    "type": "Unicast",
+    "payload": {
+      "user": ""
+    }
+  }
+}

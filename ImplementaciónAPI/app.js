@@ -18,6 +18,7 @@ import { router as HomeRoute } from "./routes/home.route.js";
 import { router as LoginRoute } from "./routes/login.route.js";
 import { router as OrdersSummaryRoute } from "./routes/ordersSummary.route.js";
 import { router as LaboratoryInfoRoute} from "./routes/laboratoryInfo.route.js";
+import { router as OrdersRoute} from "./routes/orders.route.js";
 import { validateLognIn } from "./validators/login.validator.js";
 import { validateToken } from "./middleware/jwt.middleware.js";
 import {validateOrdersSummary} from "./validators/ordersSummary.validator.js";
@@ -161,5 +162,6 @@ app.use("/api/v1/login", validateLognIn, LoginRoute);
  */
 app.use("/api/v1/orders-summary", [validateToken, validateOrdersSummary], OrdersSummaryRoute);
 app.use("/api/v1/laboratory-info", LaboratoryInfoRoute);
+app.use("/api/v1/orders", OrdersRoute);
 
 export { app };
